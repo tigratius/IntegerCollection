@@ -18,35 +18,35 @@
 
 ## Описание класса 
 
-Класс реализующий данную задачу  - IntegerCollection  
+Класс реализующий данную задачу  - **IntegerCollection**  
 содержит 7 методов для работы с коллекцией
 
 операция добавления  
-public void add(int item)
+**public void add(int item)**
 
 операция удаления  
-public boolean remove(int item)  
+**public boolean remove(int item)**  
 Возвращает true, если успешная операция, иначе false (если коллеция пуста или не найдено значение)
 
 поиск элемента по значению  
-public int findByValue(int item)  
+**public int findByValue(int item)**  
 Вовзращает -1, если значение не найдено  
 
 поиск элемента по индексу  
-public int findByIndex(int ind)  
+**public int findByIndex(int ind)**  
 кидает исключение NoSuchElementException, если коллекция пустая  
 кидает исключение IndexOutOfBoundsException, если индекс за пределами диапозона  
 
 поиск максимального элемента  
-public int findMax()  
+**public int findMax()**  
 кидает исключение NoSuchElementException, если коллекция пустая  
 
 поиск минимального элемента  
-public int findMin()  
+**public int findMin()**  
 кидает исключение NoSuchElementException, если коллекция пустая  
 
 поиск среднего арифметического всех элементов  
-public int findAverage()  
+**public int findAverage()**  
 кидает исключение NoSuchElementException, если коллекция пустая  
 
 ## Инструкция по запуску 
