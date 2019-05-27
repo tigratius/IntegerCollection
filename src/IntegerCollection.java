@@ -3,33 +3,33 @@ import java.util.NoSuchElementException;
 
 public class IntegerCollection implements Iterable<Integer> {
 
-    private int[] q;
-    private int n;
+    private int[] values;
+    private int length;
 
     public IntegerCollection() {
-        q = new int[2];
-        n = 0;
+        values = new int[2];
+        length = 0;
     }
 
     public int size() {
-        return n;
+        return length;
     }
 
     public boolean isEmpty() {
-        return n == 0;
+        return length == 0;
     }
 
     //добавление
     public void add(int item) {
 
-        for (int i = 0; i < n; i++) {
-            q[i] += item;
+        for (int i = 0; i < length; i++) {
+            values[i] += item;
         }
 
-        if (n == q.length)
-            resize(2 * q.length);
+        if (length == values.length)
+            resize(2 * values.length);
 
-        q[n++] = item;
+        values[length++] = item;
     }
 
     //удаление
@@ -43,16 +43,16 @@ public class IntegerCollection implements Iterable<Integer> {
         if (index == -1)
             return false;
 
-        for (int i = 0; i < n - 1; i++) {
+        for (int i = 0; i < length - 1; i++) {
             if (i >= index) {
-                q[i] = q[i + 1] - item;
+                values[i] = values[i + 1] - item;
             } else {
-                q[i] -= item;
+                values[i] -= item;
             }
         }
-        n--;
+        length--;
 
-        if (n > 0 && n == q.length / 4) resize(q.length / 2);
+        if (length > 0 && length == values.length / 4) resize(values.length / 2);
 
         return true;
     }
@@ -60,8 +60,8 @@ public class IntegerCollection implements Iterable<Integer> {
     //поиск элемента по значению
     public int findByValue(int item) {
 
-        for (int i = 0; i < n; i++) {
-            if (item == q[i]) {
+        for (int i = 0; i < length; i++) {
+            if (item == values[i]) {
                 return i;
             }
         }
@@ -74,10 +74,10 @@ public class IntegerCollection implements Iterable<Integer> {
         if (isEmpty())
             throw new NoSuchElementException("Коллекция пустая");
 
-        if (ind < 0 || ind >= n)
+        if (ind < 0 || ind >= length)
             throw new IndexOutOfBoundsException("Индекс за пределами диапозона");
 
-        return q[ind];
+        return values[ind];
     }
 
     public int findMax() {
@@ -85,10 +85,10 @@ public class IntegerCollection implements Iterable<Integer> {
         if (isEmpty())
             throw new NoSuchElementException("Коллекция пустая");
 
-        int max = q[0];
-        for (int i = 1; i < n; i++) {
-            if (q[i] > max) {
-                max = q[i];
+        int max = values[0];
+        for (int i = 1; i < length; i++) {
+            if (values[i] > max) {
+                max = values[i];
             }
         }
 
@@ -100,10 +100,10 @@ public class IntegerCollection implements Iterable<Integer> {
         if (isEmpty())
             throw new NoSuchElementException("Коллекция пустая");
 
-        int min = q[0];
-        for (int i = 1; i < n; i++) {
-            if (q[i] < min) {
-                min = q[i];
+        int min = values[0];
+        for (int i = 1; i < length; i++) {
+            if (values[i] < min) {
+                min = values[i];
             }
         }
 
@@ -116,21 +116,21 @@ public class IntegerCollection implements Iterable<Integer> {
             throw new NoSuchElementException("Коллекция пустая");
 
         int sum = 0;
-        for (int i = 0; i < n; i++) {
-            sum += q[i];
+        for (int i = 0; i < length; i++) {
+            sum += values[i];
         }
 
-        return sum / n;
+        return sum / length;
     }
 
     private void resize(int capacity) {
         int[] temp = new int[capacity];
 
-        for (int i = 0; i < n; i++) {
-            temp[i] = q[i];
+        for (int i = 0; i < length; i++) {
+            temp[i] = values[i];
         }
 
-        q = temp;
+        values = temp;
     }
 
     public Iterator<Integer> iterator() {
@@ -141,7 +141,7 @@ public class IntegerCollection implements Iterable<Integer> {
         private int i = 0;
 
         public boolean hasNext() {
-            return i < n;
+            return i < length;
         }
 
         public void remove() {
@@ -151,7 +151,7 @@ public class IntegerCollection implements Iterable<Integer> {
         public Integer next() {
             if (!hasNext()) throw new NoSuchElementException();
 
-            int item = q[i];
+            int item = values[i];
             i++;
 
             return item;
